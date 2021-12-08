@@ -3,8 +3,11 @@ package com.example.emailverification.service;
 import com.example.emailverification.entity.User;
 import com.example.emailverification.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
@@ -25,6 +28,23 @@ public class EmailService {
         repository.save(user);
         return "SUCCESS";
     }
+
+    public Optional<User> getById(Long id) {
+        var item = repository.findById(id);
+        if (item.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id Not Found");
+        } else {
+            return item;
+        }
+    }
+    public User getByEmail(String email) {
+       var item = repository.findByEmailAddress(email);
+
+            return item;
+
+    }
+
+
 
     public Boolean verifyEmail(String email) {
         var m = p.matcher(email);

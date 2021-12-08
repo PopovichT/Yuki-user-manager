@@ -5,6 +5,8 @@ import com.example.emailverification.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api")
 class EmailController {
@@ -20,4 +22,20 @@ class EmailController {
     public String addUser(@RequestBody User user) {
         return service.addUserToDatabase(user);
     }
+
+
+    @GetMapping("{id}")
+    public Optional<User> getUserById(@RequestParam Long userId){
+        return service.getById(userId);
+    }
+
+    @GetMapping("{email}")
+    public User getUserByEmail(@RequestParam String email){
+        return service.getByEmail(email);
+    }
+
 }
+
+
+
+
