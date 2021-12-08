@@ -24,12 +24,12 @@ class EmailController {
     }
 
 
-    @GetMapping("{id}")
-    public Optional<User> getUserById(@RequestParam Long userId){
+    @GetMapping("{userId}")
+    public User getUserById(@PathVariable Long userId){
         return service.getById(userId);
     }
 
-    @GetMapping("{email}")
+    @GetMapping("/get")
     public User getUserByEmail(@RequestParam String email){
         return service.getByEmail(email);
     }

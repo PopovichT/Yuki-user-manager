@@ -29,21 +29,21 @@ public class EmailService {
         return "SUCCESS";
     }
 
-    public Optional<User> getById(Long id) {
+    public User getById(Long id) {
         var item = repository.findById(id);
         if (item.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id Not Found");
-        } else {
-            return item;
+            return item.get();
         }
+        throw new IllegalArgumentException("User id mismatch");
     }
+
     public User getByEmail(String email) {
-       var item = repository.findByEmailAddress(email);
-
-            return item;
-
+        var itemOptional = repository.findByEmail(email);
+        if (itemOptional.isPresent()) {
+            return itemOptional.get();
+        }
+        throw new IllegalArgumentException("User email mismatch");
     }
-
 
 
     public Boolean verifyEmail(String email) {
