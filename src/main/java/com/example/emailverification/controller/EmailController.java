@@ -19,7 +19,7 @@ class EmailController {
     }
 
     @PostMapping("/add")
-    public String addUser(@RequestBody User user) {
+    public Long addUser(@RequestBody User user) {
         return service.addUserToDatabase(user);
     }
 

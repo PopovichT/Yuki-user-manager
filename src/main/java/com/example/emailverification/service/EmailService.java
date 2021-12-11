@@ -2,6 +2,7 @@ package com.example.emailverification.service;
 
 import com.example.emailverification.entity.User;
 import com.example.emailverification.repository.UserRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,14 @@ public class EmailService {
         this.repository = repository;
     }
 
-    public String addUserToDatabase(User user) {
+
+    public Long addUserToDatabase(User user) {
         var bool = verifyEmail(user.getEmail());
         if (!bool) {
-            return "FAIL";
+            throw new IllegalArgumentException("Incorrect email");
         }
-        repository.save(user);
-        return "SUCCESS";
+        var result = repository.save(user);
+        return result.getId();
     }
 
     public User getById(Long id) {
