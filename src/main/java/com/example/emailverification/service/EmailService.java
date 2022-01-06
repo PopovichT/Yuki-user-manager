@@ -2,13 +2,10 @@ package com.example.emailverification.service;
 
 import com.example.emailverification.entity.User;
 import com.example.emailverification.repository.UserRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -45,7 +42,16 @@ public class EmailService {
             return itemOptional.get();
         }
         throw new IllegalArgumentException("User email mismatch");
+         }
+
+public List<User> findLongestUserEmail(Long id){
+    var itemOptional = repository.findLongestUserEmail(id);
+    if (itemOptional.isEmpty()) {
+        throw new IllegalArgumentException("No data");
     }
+    return itemOptional;
+    }
+
 
 
     public Boolean verifyEmail(String email) {

@@ -74,4 +74,6 @@ public class EmailServiceTest {
 
         verify(spyService).verifyEmail(any());
     }
+
+
 }

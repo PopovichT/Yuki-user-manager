@@ -34,6 +34,10 @@ class EmailController {
         return service.getByEmail(email);
     }
 
+   @GetMapping("{longestEmail}")
+   public User findLongestEmail(@PathVariable String longestEmail){return service.findLongestUserEmail(longestEmail);
+    }
+
 }
 
 

@@ -28,4 +28,27 @@ public class UserRepositoryTest {
         assertEquals("Arthur", foundedUserOptional.get().getName());
         assertEquals("klezovich@phystech.edu", foundedUserOptional.get().getEmail());
     }
+        @Test
+        void foundUserEmailTest(){
+            var user = new User();
+            user.setEmail("klezovich@phystech.edu");
+            user.setName("Arthur");
+            var savedUser = repository.save(user);
+            var foundedUsersEmail = repository.findByEmail(savedUser.getEmail());
+            assertTrue(foundedUsersEmail.isPresent());
+            assertEquals("klezovich@phystech.edu", foundedUsersEmail.get().getEmail());
+ }
+
+@Test
+    void foundLongestEmail(){
+    var user = new User();
+    user.setEmail("klezovich@phystech.edu");
+    user.setName("Arthur");
+    var savedUser= repository.save(user);
+    var foundedUserOptional = repository.findLongestUserEmail(savedUser.getId());
+
 }
+
+    }
+
+

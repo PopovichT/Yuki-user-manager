@@ -22,15 +22,5 @@ public class MockDemo {
         assertEquals(mockList.size(), 100);
     }
 
-    @Test
-    public void testSpyList() {
-        List<Integer> spyList = Mockito.spy(new ArrayList<>());
 
-        spyList.add(100);
-        spyList.add(200);
-
-        Mockito.verify(spyList).add(100);
-
-        assertEquals(spyList.size(), 2);
-    }
 }
