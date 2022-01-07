@@ -44,7 +44,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void foundLongestEmail() {
+    void foundLongestEmailTest() {
         var user = UserObjectMother.valid().name("Arthur").email("klezovich@phystech.edu").build();
         var user2 = UserObjectMother.valid().name("Taras").email("t@t.ru").build();
         repository.save(user);
@@ -56,7 +56,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void foundLongEmail2() {
+    void foundLongEmail2Test() {
         var user = UserObjectMother.valid().name("Arthur").email("klezovich@phystech.edu").build();
         var user2 = UserObjectMother.valid().name("qweqwe").email("qwezovich@phystech.edu").build();
         var user3 = UserObjectMother.valid().name("Taras").email("t@t.ru").build();
