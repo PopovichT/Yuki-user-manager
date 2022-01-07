@@ -5,7 +5,7 @@ import com.example.emailverification.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -25,19 +25,24 @@ class EmailController {
 
 
     @GetMapping("{userId}")
-    public User getUserById(@PathVariable Long userId){
+    public User getUserById(@PathVariable Long userId) {
         return service.getById(userId);
     }
 
     @GetMapping("/get")
-    public User getUserByEmail(@RequestParam String email){
+    public User getUserByEmail(@RequestParam String email) {
         return service.getByEmail(email);
     }
 
-   @GetMapping("{longestEmail}")
-   public User findLongestEmail(@PathVariable String longestEmail){return service.findLongestUserEmail(longestEmail);
+    @GetMapping("/longest")
+    public List<User> findLongestEmail() {
+        return service.findUserWithLongestEmail();
     }
 
+    @PostMapping("{userId}/message")
+    public void addMessage(@PathVariable Long userId, @RequestParam String message) {
+        service.userPostMessage(userId, message);
+    }
 }
 
 

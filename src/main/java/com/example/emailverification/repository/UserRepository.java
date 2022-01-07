@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
-    @Query(value="Select* FROM USER WHERE LENGTH(EMAIL) = (SELECT MAX(length(EMAIL)) FROM USER))", nativeQuery=true)
-    List<User> findLongestUserEmail(Long id);
+    @Query(value="Select * FROM USER WHERE LENGTH(EMAIL) = (SELECT MAX(length(EMAIL)) FROM USER)", nativeQuery=true)
+    List<User> findUserWithLongestEmail();
 
 }
 
