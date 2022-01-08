@@ -1,8 +1,7 @@
 INSERT INTO USER (id, name, email)
-VALUES ('1', 'Петросян', 'Petrosyan@anshlag.ru'),
-       ('2', 'Аристотель', 'doesntexist@gmail.com'),
-       ('3', 'Конфуций', 'chinatown@firewall.ch'),
-       ('7', 'Конфуций', 'chinatown@firewall.ch'),
+VALUES ('1', 'Петросян', 'Petrosyan@anshlagg.ru'),
+       ('2', 'Аристотель', 'doesntexist@gmail.co'),
+       ('3', 'Конфуций', 'chinatown@firewall.com'),
        ('4', 'Тарас', 't@t.ru');
 INSERT INTO MESSAGE_POST (id, message, user_id)
 VALUES ('1', 'Любовь — это пуля со смещенным центром, которая бьёт в сердце, выворачивает карманы и выходит боком.“',

@@ -24,6 +24,11 @@ public class EmailService {
 
 
     public Long addUserToDatabase(User user) {
+        var userOpt = userRepository.findByEmail(user.getEmail());
+        if (userOpt.isPresent()) {
+            throw new IllegalArgumentException("Email is already exist");
+        }
+
         var bool = verifyEmail(user.getEmail());
         if (!bool) {
             throw new IllegalArgumentException("Incorrect email");
@@ -75,4 +80,6 @@ public class EmailService {
 
         messageRepository.save(messagePost);
     }
+
+
 }
