@@ -67,6 +67,7 @@ public class UserRepositoryTest {
         log.info(foundedUsers.toString());
         assertEquals(foundedUsers.size(), 1);
     }
+
 }
 
 

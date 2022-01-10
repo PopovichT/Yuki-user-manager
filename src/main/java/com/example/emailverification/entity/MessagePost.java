@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,10 +19,8 @@ public class MessagePost {
     @Id
     @GeneratedValue
     private Long id;
-
     @NotNull
     private String message;
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

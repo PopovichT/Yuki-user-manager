@@ -52,6 +52,13 @@ public class EmailService {
         }
         throw new IllegalArgumentException("User email mismatch");
     }
+    public List<MessagePost> findLongestStringOfUser(Long id){
+        var itemOptional =messageRepository.findLongestMessage(id);
+        if (itemOptional.isEmpty()) {
+            throw new IllegalArgumentException("No data");
+        }
+        return itemOptional;
+    }
 
     public List<User> findUserWithLongestEmail() {
         var itemOptional = userRepository.findUserWithLongestEmail();

@@ -39,6 +39,10 @@ class EmailController {
         return service.findUserWithLongestEmail();
     }
 
+   @GetMapping("{userId}/longestString")
+    public void findLongestStingOfUser (@PathVariable Long userId) {
+      service.findLongestStringOfUser(userId);
+    }
     @PostMapping("{userId}/message")
     public void addMessage(@PathVariable Long userId, @RequestParam String message) {
         service.userPostMessage(userId, message);
