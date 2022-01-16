@@ -44,6 +44,13 @@ public class EmailService {
         }
         throw new IllegalArgumentException("User id mismatch");
     }
+    public List<MessagePost> findAllUsersMessages(Long id){
+        var item =messageRepository.findAllMessages(id);
+        if (item.isEmpty()) {
+            throw new IllegalArgumentException("No messages");
+        }
+        return item;
+    }
 
     public User getByEmail(String email) {
         var itemOptional = userRepository.findByEmail(email);

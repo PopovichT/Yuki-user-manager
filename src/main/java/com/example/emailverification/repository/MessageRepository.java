@@ -10,6 +10,9 @@ import java.util.List;
 
 @Repository
 public interface MessageRepository extends CrudRepository<MessagePost, Long> {
-    @Query(value="Select * FROM MESSAGE_POST WHERE LENGTH(MESSAGE )   = (SELECT MAX(length(MESSAGE))FROM MESSAGE_POST where USER_ID =id)", nativeQuery=true)
-   List<MessagePost> findLongestMessage(Long id);
+    @Query(value = "Select * FROM MESSAGE_POST WHERE LENGTH(MESSAGE )   = (SELECT MAX(length(MESSAGE))FROM MESSAGE_POST where USER_ID =:id)", nativeQuery = true)
+    List<MessagePost> findLongestMessage(Long id);
+
+    @Query(value = "SELECT*FROM MESSAGE_POST WHERE USER_ID =:id", nativeQuery = true)
+    List<MessagePost> findAllMessages(Long id);
 }

@@ -2,6 +2,7 @@ package com.example.emailverification.repository;
 
 import com.example.emailverification.entity.MessagePost;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.mapping.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -30,5 +31,10 @@ public class MessageRepositoryTest {
     void findLongestMessageOfUser(){
         var foundedMessage = repository.findLongestMessage(1L);
        assertTrue(foundedMessage.contains("\"Любовь — это пуля со смещенным центром, которая бьёт в сердце, выворачивает карманы и выходит боком.\""));
+    }
+    @Test
+    void findAllMessagesOfUserTest (){
+        var foundedList = repository.findAllMessages(1L);
+        assertTrue(foundedList.contains(""));
     }
 }
