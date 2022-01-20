@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +22,7 @@ public class MessagePost {
     @GeneratedValue
     private Long id;
     @NotNull
+    @NotEmpty(message = "Message is empty")
     private String message;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

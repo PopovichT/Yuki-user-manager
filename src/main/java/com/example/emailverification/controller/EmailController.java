@@ -43,7 +43,7 @@ class EmailController {
     public void findLongestStingOfUser (@PathVariable Long userId) {
       service.findLongestStringOfUser(userId);
     }
-    @GetMapping("{userId}/allstrings")
+    @GetMapping("{userId}/strings")
     public void findAllMessagesOfUser(@PathVariable Long userId){
         service.findAllUsersMessages(userId);
     }
