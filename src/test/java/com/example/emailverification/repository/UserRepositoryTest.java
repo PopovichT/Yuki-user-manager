@@ -33,6 +33,25 @@ public class UserRepositoryTest {
     }
 
     @Test
+    void testCanSaveUsersWithSameEmail() {
+        var user = new User();
+        user.setEmail("klezovich@phystech.edu");
+        user.setName("Arthur");
+        user.setId(5L);
+        var user2 = user;
+        user2.setId(6L);
+
+//        var savedUser = repository.save(user);
+//        var savedUser2 = repository.save(user2);
+
+        var foundedUsers = repository.findAllByEmail("Petrosyan@anshlagg.ru");
+        foundedUsers.forEach(e -> log.info("LOG: {}", e.toString()));
+//        assertTrue(foundedUserOptional.isPresent());
+//        assertEquals("Arthur", foundedUserOptional.get().getName());
+//        assertEquals("klezovich@phystech.edu", foundedUserOptional.get().getEmail());
+    }
+
+    @Test
     void foundUserEmailTest() {
         var user = new User();
         user.setEmail("klezovich@phystech.edu");

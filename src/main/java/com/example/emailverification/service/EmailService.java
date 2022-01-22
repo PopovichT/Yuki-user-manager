@@ -25,10 +25,10 @@ public class EmailService {
 
 
     public Long addUserToDatabase(@Valid User user) {
-        var userOpt = userRepository.findByEmail(user.getEmail());
-        if (userOpt.isPresent()) {
-            throw new IllegalArgumentException("Email is already exist");
-        }
+//        var userOpt = userRepository.findByEmail(user.getEmail());
+//        if (userOpt.isPresent()) {
+//            throw new IllegalArgumentException("Email is already exist");
+//        }
 
         var bool = verifyEmail(user.getEmail());
         if (!bool) {

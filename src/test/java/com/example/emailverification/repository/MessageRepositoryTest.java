@@ -13,28 +13,39 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DataJpaTest
 @Slf4j
 public class MessageRepositoryTest {
-@Autowired
+    @Autowired
     private MessageRepository repository;
- /*
-@Test
-    void postMessage (){
-    MessagePost post = new MessagePost();
-    post.setMessage("Posting message test");
-    var savedpost=repository.save(post);
-    var foundedPostOptional = repository.findById(savedpost.getId());
-    assertTrue(foundedPostOptional.isPresent());
-    assertEquals("Posting message test", foundedPostOptional.get().getMessage());
-}
 
- */
+
+   @Test
+       void postMessage (){
+       MessagePost post = new MessagePost();
+       post.setMessage("Posting message test");
+       var savedpost=repository.save(post);
+       var foundedPostOptional = repository.findById(savedpost.getId());
+       assertTrue(foundedPostOptional.isPresent());
+       assertEquals("Posting message test", foundedPostOptional.get().getMessage());
+   }
+
+
     @Test
-    void findLongestMessageOfUser(){
+    void findLongestMessageOfUser() {
         var foundedMessage = repository.findLongestMessage(1L);
-       assertTrue(foundedMessage.contains("\"Любовь — это пуля со смещенным центром, которая бьёт в сердце, выворачивает карманы и выходит боком.\""));
+//        log.info(foundedMessage.toString());
+        assertTrue(foundedMessage.get(0).getMessage().contains("\"Любовь — это пуля со смещенным центром, которая бьёт в сердце, выворачивает карманы и выходит боком.\""));
     }
+
     @Test
-    void findAllMessagesOfUserTest (){
+    void findAllMessagesOfUserTest() {
         var foundedList = repository.findAllMessages(1L);
+        log.info(foundedList.toString());
         assertTrue(foundedList.contains(""));
+    }
+
+    @Test
+    void findAllMessagesOfUserTest2() {
+        var foundedList = repository.findMessagePostsByUserId(4L);
+        log.info("LOG: {}", foundedList);
+        assertTrue(foundedList.size() == 2);
     }
 }

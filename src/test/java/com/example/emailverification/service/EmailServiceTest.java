@@ -50,6 +50,7 @@ public class EmailServiceTest {
         assertEquals(result, 1L);
     }
 
+
     @Test
     void couldServiceTrowExceptionWhenAddingUserWithInvalidEmail() {
         var user = new User();

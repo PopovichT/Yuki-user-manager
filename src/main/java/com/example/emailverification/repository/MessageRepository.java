@@ -15,4 +15,6 @@ public interface MessageRepository extends CrudRepository<MessagePost, Long> {
 
     @Query(value = "SELECT*FROM MESSAGE_POST WHERE USER_ID =:id", nativeQuery = true)
     List<MessagePost> findAllMessages(Long id);
+
+    List<MessagePost> findMessagePostsByUserId(Long id); // test
 }

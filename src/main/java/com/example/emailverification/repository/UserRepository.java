@@ -15,5 +15,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value="Select * FROM USER WHERE LENGTH(EMAIL) = (SELECT MAX(length(EMAIL)) FROM USER)", nativeQuery=true)
     List<User> findUserWithLongestEmail();
 
+    List<User> findAllByEmail(String email);
 }
 

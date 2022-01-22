@@ -1,21 +1,18 @@
 package com.example.emailverification.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Builder
+@Getter
+@Setter
 public class MessagePost {
 
     @Id
@@ -27,4 +24,13 @@ public class MessagePost {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Override
+    public String toString() {
+        return "MessagePost{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", user=" + user.getName() +
+                '}';
+    }
 }

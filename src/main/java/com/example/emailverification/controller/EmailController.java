@@ -1,5 +1,6 @@
 package com.example.emailverification.controller;
 
+import com.example.emailverification.entity.MessagePost;
 import com.example.emailverification.entity.User;
 import com.example.emailverification.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,12 @@ class EmailController {
     }
 
    @GetMapping("{userId}/longestString")
-    public void findLongestStingOfUser (@PathVariable Long userId) {
-      service.findLongestStringOfUser(userId);
+    public List<MessagePost> findLongestStingOfUser (@PathVariable Long userId) {
+      return service.findLongestStringOfUser(userId);
     }
     @GetMapping("{userId}/strings")
-    public void findAllMessagesOfUser(@PathVariable Long userId){
-        service.findAllUsersMessages(userId);
+    public List<MessagePost> findAllMessagesOfUser(@PathVariable Long userId){
+         return service.findAllUsersMessages(userId);
     }
 
     @GetMapping("{userId}/message")
