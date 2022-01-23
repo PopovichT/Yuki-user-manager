@@ -1,33 +1,100 @@
 package com.example.emailverification.service;
 
+import com.example.emailverification.entity.MessagePost;
 import com.example.emailverification.entity.User;
+import com.example.emailverification.repository.MessageRepository;
 import com.example.emailverification.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
 public class EmailService {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+    private final MessageRepository messageRepository;
     private final Pattern p = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$");
 
     @Autowired
-    public EmailService(UserRepository repository) {
-        this.repository = repository;
+    public EmailService(UserRepository userRepository, MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+        this.userRepository = userRepository;
     }
 
-    public String addUserToDatabase(User user) {
+
+    public Long addUserToDatabase(@Valid User user) {
+//        var userOpt = userRepository.findByEmail(user.getEmail());
+//        if (userOpt.isPresent()) {
+//            throw new IllegalArgumentException("Email is already exist");
+//        }
+
         var bool = verifyEmail(user.getEmail());
         if (!bool) {
-            return "FAIL";
+            throw new IllegalArgumentException("Incorrect email");
         }
-        repository.save(user);
-        return "SUCCESS";
+        var result = userRepository.save(user);
+        return result.getId();
+    }
+
+    public User getById(Long id) {
+        var item = userRepository.findById(id);
+        if (item.isPresent()) {
+            return item.get();
+        }
+        throw new IllegalArgumentException("User id mismatch");
+    }
+    public List<MessagePost> findAllUsersMessages(Long id){
+        var item =messageRepository.findAllMessages(id);
+        if (item.isEmpty()) {
+            throw new IllegalArgumentException("No messages");
+        }
+        return item;
+    }
+
+    public User getByEmail(String email) {
+        var itemOptional = userRepository.findByEmail(email);
+        if (itemOptional.isPresent()) {
+            return itemOptional.get();
+        }
+        throw new IllegalArgumentException("User email mismatch");
+    }
+    public List<MessagePost> findLongestStringOfUser(Long id){
+        var itemOptional =messageRepository.findLongestMessage(id);
+        if (itemOptional.isEmpty()) {
+            throw new IllegalArgumentException("No data");
+        }
+        return itemOptional;
+    }
+
+    public List<User> findUserWithLongestEmail() {
+        var itemOptional = userRepository.findUserWithLongestEmail();
+        if (itemOptional.isEmpty()) {
+            throw new IllegalArgumentException("No data");
+        }
+        return itemOptional;
     }
 
     public Boolean verifyEmail(String email) {
         var m = p.matcher(email);
         return m.matches();
     }
+
+    public void userPostMessage(Long userId, String message) {
+        var userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new IllegalArgumentException("No data");
+        }
+        var user = userOpt.get();
+
+        var messagePost = MessagePost.builder()
+                .message(message)
+                .user(user)
+                .build();
+
+        messageRepository.save(messagePost);
+    }
+
+
 }
